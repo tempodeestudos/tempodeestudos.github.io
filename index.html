@@ -15,10 +15,15 @@
 html,body{margin:0;background:#F3EDE1;color:#2B241C;-webkit-font-smoothing:antialiased}
 *{box-sizing:border-box}
 a{color:#7A2E26;text-decoration:underline;text-underline-offset:3px}
+button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
+/* Hover só em aparelhos com mouse: no toque o :hover "gruda" e marcaria o botão que aparece no mesmo lugar na tela seguinte. */
+@media (hover:hover){
 a:hover{color:#2B241C}
-button{font:inherit;color:inherit}
-/* Só em aparelhos com mouse: no toque o :hover "gruda" e marcaria a alternativa da próxima pergunta. */
-@media (hover:hover){.tel-opt:hover{background:#F1E9DA!important;border-color:#7A2E26!important}}
+.tel-opt:hover{background:#F1E9DA!important;border-color:#7A2E26!important}
+.h-bg:hover{background:#7A2E26!important}
+.h-inv:hover{background:#7A2E26!important;color:#F3EDE1!important}
+.h-border:hover:not(:disabled){border-color:#7A2E26!important}
+}
 </style>
 </helmet>
 <div style="min-height:100vh;font-family:'EB Garamond',Georgia,serif;font-size:19px;line-height:1.5;display:flex;justify-content:center;padding:28px 18px 64px">
@@ -47,7 +52,7 @@ button{font:inherit;color:inherit}
         <div style="font-size:28px;line-height:1.3;font-style:italic;text-wrap:pretty">{{ telQ }}</div>
         <div style="display:flex;flex-direction:column;gap:10px">
           <sc-for list="{{ telOptions }}" as="o" hint-placeholder-count="4">
-            <button class="tel-opt" onClick="{{ o.pick }}" style="text-align:left;background:transparent;border:1px solid #C9BBA0;padding:14px 18px;cursor:pointer;font-family:Cinzel,serif;font-size:18px;letter-spacing:0.12em;line-height:1.6;min-height:52px;-webkit-tap-highlight-color:transparent">{{ o.text }}</button>
+            <button class="tel-opt" onClick="{{ o.pick }}" style="text-align:left;background:transparent;border:1px solid #C9BBA0;padding:14px 18px;cursor:pointer;font-family:Cinzel,serif;font-size:18px;letter-spacing:0.12em;line-height:1.6;min-height:52px">{{ o.text }}</button>
           </sc-for>
         </div>
       </div>
@@ -98,7 +103,7 @@ button{font:inherit;color:inherit}
     <button onClick="{{ goSetup }}" style="background:none;border:none;padding:0;cursor:pointer;font-family:Cinzel,serif;font-weight:600;font-size:17px;letter-spacing:0.1em">SABATINA</button>
     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:flex-end">
       <div style="font-family:Cinzel,serif;font-size:13px;letter-spacing:0.16em;color:#6B5F50">REAA · APRENDIZ</div>
-      <button onClick="{{ encerrar }}" style="background:transparent;border:1px solid #7A2E26;color:#7A2E26;padding:6px 12px;cursor:pointer;font-family:Cinzel,serif;font-size:12px;letter-spacing:0.14em;min-height:36px" style-hover="background:#7A2E26;color:#F3EDE1">ENCERRAR OS TRABALHOS</button>
+      <button class="h-inv" onClick="{{ encerrar }}" style="background:transparent;border:1px solid #7A2E26;color:#7A2E26;padding:6px 12px;cursor:pointer;font-family:Cinzel,serif;font-size:12px;letter-spacing:0.14em;min-height:36px">ENCERRAR OS TRABALHOS</button>
     </div>
   </div>
 </sc-if>
@@ -128,10 +133,10 @@ button{font:inherit;color:inherit}
     </div>
     <div style="display:flex;flex-direction:column;gap:10px">
       <sc-if value="{{ hasSaved }}" hint-placeholder-val="{{ false }}">
-        <button onClick="{{ resume }}" style="background:#2B241C;color:#F3EDE1;border:none;padding:16px 20px;cursor:pointer;font-family:Cinzel,serif;font-size:16px;letter-spacing:0.12em;display:flex;justify-content:space-between;gap:12px;min-height:56px;align-items:center" style-hover="background:#7A2E26"><span>CONTINUAR SABATINA</span><span style="font-family:'EB Garamond',serif;letter-spacing:0;font-size:17px">{{ savedLabel }}</span></button>
+        <button class="h-bg" onClick="{{ resume }}" style="background:#2B241C;color:#F3EDE1;border:none;padding:16px 20px;cursor:pointer;font-family:Cinzel,serif;font-size:16px;letter-spacing:0.12em;display:flex;justify-content:space-between;gap:12px;min-height:56px;align-items:center"><span>CONTINUAR SABATINA</span><span style="font-family:'EB Garamond',serif;letter-spacing:0;font-size:17px">{{ savedLabel }}</span></button>
       </sc-if>
-      <button onClick="{{ startNew }}" style="background:{{ newBg }};color:{{ newFg }};border:1.5px solid #2B241C;padding:16px 20px;cursor:pointer;font-family:Cinzel,serif;font-size:16px;letter-spacing:0.12em;text-align:left;min-height:56px" style-hover="border-color:#7A2E26">{{ newLabel }}</button>
-      <button onClick="{{ goStudy }}" style="background:transparent;border:1px solid #C9BBA0;padding:16px 20px;cursor:pointer;font-family:Cinzel,serif;font-size:16px;letter-spacing:0.12em;text-align:left;min-height:56px" style-hover="border-color:#7A2E26">MODO ESTUDO</button>
+      <button class="h-border" onClick="{{ startNew }}" style="background:{{ newBg }};color:{{ newFg }};border:1.5px solid #2B241C;padding:16px 20px;cursor:pointer;font-family:Cinzel,serif;font-size:16px;letter-spacing:0.12em;text-align:left;min-height:56px">{{ newLabel }}</button>
+      <button class="h-border" onClick="{{ goStudy }}" style="background:transparent;border:1px solid #C9BBA0;padding:16px 20px;cursor:pointer;font-family:Cinzel,serif;font-size:16px;letter-spacing:0.12em;text-align:left;min-height:56px">MODO ESTUDO</button>
     </div>
   </div>
 </sc-if>
@@ -156,7 +161,7 @@ button{font:inherit;color:inherit}
       <div style="font-size:27px;line-height:1.3;font-style:italic;text-wrap:pretty">{{ qText }}</div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <sc-for list="{{ options }}" as="o" hint-placeholder-count="4">
-          <button onClick="{{ o.pick }}" disabled="{{ o.disabled }}" style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start;text-align:left;background:{{ o.bg }};border:1px solid {{ o.border }};padding:13px 16px;cursor:{{ o.cursor }};font-size:18px;line-height:1.45;min-height:52px;opacity:{{ o.opacity }}" style-hover="border-color:#7A2E26">
+          <button class="h-border" onClick="{{ o.pick }}" disabled="{{ o.disabled }}" style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start;text-align:left;background:{{ o.bg }};border:1px solid {{ o.border }};padding:13px 16px;cursor:{{ o.cursor }};font-size:18px;line-height:1.45;min-height:52px;opacity:{{ o.opacity }}">
             <span style="font-family:Cinzel,serif;font-weight:600;color:{{ o.letterColor }}">{{ o.letter }}</span>
             <span style="text-wrap:pretty">{{ o.text }}</span>
           </button>
@@ -172,7 +177,7 @@ button{font:inherit;color:inherit}
             <div style="font-family:Cinzel,serif;font-size:12px;letter-spacing:0.2em;color:#6B5F50">RESPOSTA DO QUESTIONÁRIO</div>
             <div style="white-space:pre-line;text-wrap:pretty;font-size:18px">{{ fullAnswer }}</div>
           </div>
-          <button onClick="{{ next }}" style="align-self:flex-end;background:#2B241C;color:#F3EDE1;border:none;padding:14px 28px;cursor:pointer;font-family:Cinzel,serif;font-size:15px;letter-spacing:0.14em;min-height:48px" style-hover="background:#7A2E26">PRÓXIMA</button>
+          <button class="h-bg" onClick="{{ next }}" style="align-self:flex-end;background:#2B241C;color:#F3EDE1;border:none;padding:14px 28px;cursor:pointer;font-family:Cinzel,serif;font-size:15px;letter-spacing:0.14em;min-height:48px">PRÓXIMA</button>
         </div>
       </sc-if>
     </div>
@@ -200,7 +205,7 @@ button{font:inherit;color:inherit}
       </div>
     </sc-if>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button onClick="{{ startNew }}" style="background:#2B241C;color:#F3EDE1;border:none;padding:14px 22px;cursor:pointer;font-family:Cinzel,serif;font-size:15px;letter-spacing:0.12em;min-height:48px" style-hover="background:#7A2E26">NOVA SABATINA</button>
+      <button class="h-bg" onClick="{{ startNew }}" style="background:#2B241C;color:#F3EDE1;border:none;padding:14px 22px;cursor:pointer;font-family:Cinzel,serif;font-size:15px;letter-spacing:0.12em;min-height:48px">NOVA SABATINA</button>
       <button onClick="{{ goStudy }}" style="background:transparent;border:1px solid #2B241C;padding:14px 22px;cursor:pointer;font-family:Cinzel,serif;font-size:15px;letter-spacing:0.12em;min-height:48px">MODO ESTUDO</button>
     </div>
   </div>
