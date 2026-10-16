@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script src="./dados.enc.js"></script>
+<style>
+html,body{margin:0;background:#F3EDE1;color:#2B241C;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#7A2E26;text-decoration:underline;text-underline-offset:3px}
+a:hover{color:#2B241C}
+button{font:inherit;color:inherit}
+</style>
+</helmet>
+<div style="min-height:100vh;font-family:'EB Garamond',Georgia,serif;font-size:19px;line-height:1.5;display:flex;justify-content:center;padding:28px 18px 64px">
+<div style="width:100%;max-width:680px;display:flex;flex-direction:column;gap:28px">
+
+<sc-if value="{{ showLoading }}" hint-placeholder-val="{{ false }}">
+  <div style="text-align:center;color:#6B5F50;padding:80px 0;font-style:italic">{{ loadingText }}</div>
+</sc-if>
+
+<sc-if value="{{ isTel }}" hint-placeholder-val="{{ true }}">
+  <div style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:24px;text-align:center">
+      <div style="font-family:Cinzel,serif;font-size:13px;letter-spacing:0.28em;color:#6B5F50">A∴ G∴ D∴ G∴ A∴ D∴ U∴</div>
+      <div style="width:48px;height:1px;background:#B8A88C"></div>
+    </div>
+    <div style="background:#FBF8F1;border:1px solid #D5C8B0;outline:1px solid #D5C8B0;outline-offset:4px;padding:32px 28px;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+        <div style="font-family:Cinzel,serif;font-size:13px;letter-spacing:0.2em;color:#6B5F50">{{ telNum }} ∴ 6</div>
+        <div style="display:flex;gap:6px">
+          <sc-for list="{{ telDots }}" as="d" hint-placeholder-count="6">
+            <div style="width:8px;height:8px;transform:rotate(45deg);background:{{ d.bg }};border:1px solid #9C8B6E"></div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="font-size:28px;line-height:1.3;font-style:italic;text-wrap:pretty">{{ telQ }}</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ telOptions }}" as="o" hint-placeholder-count="4">
+          <button onClick="{{ o.pick }}" style="text-align:left;background:transparent;border:1px solid #C9BBA0;padding:14px 18px;cursor:pointer;font-family:Cinzel,serif;font-size:18px;letter-spacing:0.12em;line-height:1.6;min-height:52px" style-hover="background:#F1E9DA;border-color:#7A2E26">{{ o.text }}</button>
+        </sc-for>
+      </div>
+      <sc-if value="{{ telCanBack }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ telBack }}" style="align-self:flex-start;background:none;border:none;padding:0;color:#6B5F50;cursor:pointer;font-size:16px;text-decoration:underline;text-underline-offset:3px">←</button>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isConcedido }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;padding-top:96px;transition:opacity 0.9s ease;opacity:{{ cOpacity }}">
+    <div style="width:12px;height:12px;transform:rotate(45deg);background:#2B241C"></div>
+    <div style="font-size:28px;font-style:italic;line-height:1.3">E vos será concedido.</div>
+    <h1 style="margin:0;font-family:Cinzel,serif;font-weight:600;font-size:34px;letter-spacing:0.06em">Bem vindo, meu Ir∴</h1>
+    <div style="width:48px;height:1px;background:#B8A88C"></div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isProfano }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;gap:22px;padding-top:24px">
+    <div style="font-family:Cinzel,serif;font-size:13px;letter-spacing:0.28em;color:#6B5F50">CONHEÇA</div>
+    <h1 style="margin:0;font-family:Cinzel,serif;font-weight:600;font-size:32px;line-height:1.2">O que é a Maçonaria</h1>
+    <p style="margin:0;font-size:21px;text-wrap:pretty">A Maçonaria é uma instituição fraternal, filosófica e filantrópica presente em praticamente todos os países. Reúne homens livres e de bons costumes que buscam o aperfeiçoamento moral e intelectual, próprio e da sociedade.</p>
+    <div style="height:1px;background:#D5C8B0"></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:22px">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-family:Cinzel,serif;font-size:16px;font-weight:600">Origens</div>
+        <div style="color:#4A3F33;text-wrap:pretty">Herdeira das antigas corporações de construtores, organizou-se em sua forma moderna em Londres, em 1717.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-family:Cinzel,serif;font-size:16px;font-weight:600">Princípios</div>
+        <div style="color:#4A3F33;text-wrap:pretty">Liberdade, Igualdade e Fraternidade, com respeito à crença e à opinião de cada um.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font-family:Cinzel,serif;font-size:16px;font-weight:600">Atuação</div>
+        <div style="color:#4A3F33;text-wrap:pretty">Estudo, convivência fraterna e ações de beneficência junto às comunidades.</div>
+      </div>
+    </div>
+    <div style="height:1px;background:#D5C8B0"></div>
+    <p style="margin:0;color:#4A3F33;text-wrap:pretty">Para saber mais, procure uma Loja regular em sua cidade ou o site oficial da Potência Maçônica do seu Estado.</p>
+    <button onClick="{{ restartTel }}" style="align-self:flex-start;background:none;border:none;padding:0;color:#9C8B6E;cursor:pointer;font-size:15px">Início</button>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isApp }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #D5C8B0;padding-bottom:14px">
+    <button onClick="{{ goSetup }}" style="background:none;border:none;padding:0;cursor:pointer;font-family:Cinzel,serif;font-weight:600;font-size:17px;letter-spacing:0.1em">SABATINA</button>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:flex-end">
+      <div style="font-family:Cinzel,serif;font-size:13px;letter-spacing:0.16em;color:#6B5F50">REAA · APRENDIZ</div>
+      <button onClick="{{ encerrar }}" style="background:transparent;border:1px solid #7A2E26;color:#7A2E26;padding:6px 12px;cursor:pointer;font-family:Cinzel,serif;font-size:12px;letter-spacing:0.14em;min-height:36px" style-hover="background:#7A2E26;color:#F3EDE1">ENCERRAR OS TRABALHOS</button>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isSetup }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;gap:30px">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <h1 style="margin:0;font-family:Cinzel,serif;font-weight:600;font-size:30px;line-height:1.2">Preparação para a sabatina</h1>
+      <div style="color:#4A3F33;text-wrap:pretty">Perguntas em ordem aleatória. As que você errar voltam depois de {{ gap }} perguntas, até acertar {{ need }} vezes seguidas.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="font-family:Cinzel,serif;font-size:13px;letter-spacing:0.2em;color:#6B5F50">RITO</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px">
+        <div style="border:1.5px solid #2B241C;background:#FBF8F1;padding:12px 14px;display:flex;flex-direction:column"><span style="font-weight:600">REAA</span><span style="font-size:15px;color:#4A3F33">Escocês Antigo e Aceito</span></div>
+        <div style="border:1px dashed #C9BBA0;padding:12px 14px;display:flex;flex-direction:column;color:#7D7062"><span>Rito Brasileiro</span><span style="font-size:15px">em breve</span></div>
+        <div style="border:1px dashed #C9BBA0;padding:12px 14px;display:flex;flex-direction:column;color:#7D7062"><span>Rito Moderno</span><span style="font-size:15px">em breve</span></div>
+        <div style="border:1px dashed #C9BBA0;padding:12px 14px;display:flex;flex-direction:column;color:#7D7062"><span>Rito de York</span><span style="font-size:15px">em breve</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="font-family:Cinzel,serif;font-size:13px;letter-spacing:0.2em;color:#6B5F50">GRAU</div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+        <div style="border:1.5px solid #2B241C;background:#FBF8F1;padding:12px 14px;display:flex;flex-direction:column"><span style="font-weight:600">Aprendiz</span><span style="font-size:15px;color:#4A3F33">60 perguntas</span></div>
+        <div style="border:1px dashed #C9BBA0;padding:12px 14px;display:flex;flex-direction:column;color:#7D7062"><span>Companheiro</span><span style="font-size:15px">em breve</span></div>
+        <div style="border:1px dashed #C9BBA0;padding:12px 14px;display:flex;flex-direction:column;color:#7D7062"><span>Mestre</span><span style="font-size:15px">em breve</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ hasSaved }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ resume }}" style="background:#2B241C;color:#F3EDE1;border:none;padding:16px 20px;cursor:pointer;font-family:Cinzel,serif;font-size:16px;letter-spacing:0.12em;display:flex;justify-content:space-between;gap:12px;min-height:56px;align-items:center" style-hover="background:#7A2E26"><span>CONTINUAR SABATINA</span><span style="font-family:'EB Garamond',serif;letter-spacing:0;font-size:17px">{{ savedLabel }}</span></button>
+      </sc-if>
+      <button onClick="{{ startNew }}" style="background:{{ newBg }};color:{{ newFg }};border:1.5px solid #2B241C;padding:16px 20px;cursor:pointer;font-family:Cinzel,serif;font-size:16px;letter-spacing:0.12em;text-align:left;min-height:56px" style-hover="border-color:#7A2E26">{{ newLabel }}</button>
+      <button onClick="{{ goStudy }}" style="background:transparent;border:1px solid #C9BBA0;padding:16px 20px;cursor:pointer;font-family:Cinzel,serif;font-size:16px;letter-spacing:0.12em;text-align:left;min-height:56px" style-hover="border-color:#7A2E26">MODO ESTUDO</button>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isQuiz }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;gap:22px">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="height:4px;background:#E2D7C3;position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:{{ progressPct }};background:#2B241C;transition:width .3s"></div></div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;font-size:15px;color:#4A3F33">
+        <div><span style="font-weight:600;color:#2B241C;font-size:18px">{{ resolved }}</span> / {{ total }} concluídas</div>
+        <div style="text-align:center"><span style="font-weight:600;color:#7A2E26;font-size:18px">{{ pendingCount }}</span> em revisão</div>
+        <div style="text-align:right"><span style="font-weight:600;color:#2B241C;font-size:18px">{{ firstPct }}</span> de primeira</div>
+      </div>
+    </div>
+    <div style="background:#FBF8F1;border:1px solid #D5C8B0;outline:1px solid #D5C8B0;outline-offset:4px;padding:30px 26px;display:flex;flex-direction:column;gap:22px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div style="font-family:Cinzel,serif;font-size:13px;letter-spacing:0.2em;color:#6B5F50">QUESTÃO {{ qNum }}{{ qTelTag }}</div>
+        <sc-if value="{{ isReview }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:15px;color:#7A2E26;border:1px solid #7A2E26;padding:2px 10px">Revisão · {{ streakLabel }}</div>
+        </sc-if>
+      </div>
+      <div style="font-size:27px;line-height:1.3;font-style:italic;text-wrap:pretty">{{ qText }}</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ options }}" as="o" hint-placeholder-count="4">
+          <button onClick="{{ o.pick }}" disabled="{{ o.disabled }}" style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start;text-align:left;background:{{ o.bg }};border:1px solid {{ o.border }};padding:13px 16px;cursor:{{ o.cursor }};font-size:18px;line-height:1.45;min-height:52px;opacity:{{ o.opacity }}" style-hover="border-color:#7A2E26">
+            <span style="font-family:Cinzel,serif;font-weight:600;color:{{ o.letterColor }}">{{ o.letter }}</span>
+            <span style="text-wrap:pretty">{{ o.text }}</span>
+          </button>
+        </sc-for>
+      </div>
+      <sc-if value="{{ answered }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:14px;border-top:1px solid #D5C8B0;padding-top:18px">
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <div style="font-family:Cinzel,serif;font-weight:600;font-size:18px;letter-spacing:0.08em;color:{{ verdictColor }}">{{ verdict }}</div>
+            <div style="font-size:16px;color:#4A3F33">{{ verdictNote }}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="font-family:Cinzel,serif;font-size:12px;letter-spacing:0.2em;color:#6B5F50">RESPOSTA DO QUESTIONÁRIO</div>
+            <div style="white-space:pre-line;text-wrap:pretty;font-size:18px">{{ fullAnswer }}</div>
+          </div>
+          <button onClick="{{ next }}" style="align-self:flex-end;background:#2B241C;color:#F3EDE1;border:none;padding:14px 28px;cursor:pointer;font-family:Cinzel,serif;font-size:15px;letter-spacing:0.14em;min-height:48px" style-hover="background:#7A2E26">PRÓXIMA</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isEnd }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding-top:12px">
+      <div style="width:12px;height:12px;transform:rotate(45deg);background:#2B241C"></div>
+      <h1 style="margin:0;font-family:Cinzel,serif;font-weight:600;font-size:30px">Sabatina concluída</h1>
+      <div style="color:#4A3F33">Todas as {{ total }} perguntas foram maçificadas.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #D5C8B0;border-bottom:1px solid #D5C8B0">
+      <div style="padding:16px 8px;text-align:center;display:flex;flex-direction:column"><span style="font-size:32px;font-weight:500">{{ firstRight }}</span><span style="font-size:15px;color:#4A3F33">acertos de primeira</span></div>
+      <div style="padding:16px 8px;text-align:center;display:flex;flex-direction:column;border-left:1px solid #D5C8B0;border-right:1px solid #D5C8B0"><span style="font-size:32px;font-weight:500;color:#7A2E26">{{ wrongCount }}</span><span style="font-size:15px;color:#4A3F33">precisaram de revisão</span></div>
+      <div style="padding:16px 8px;text-align:center;display:flex;flex-direction:column"><span style="font-size:32px;font-weight:500">{{ answeredTotal }}</span><span style="font-size:15px;color:#4A3F33">respostas dadas</span></div>
+    </div>
+    <sc-if value="{{ hasWrongList }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:Cinzel,serif;font-size:13px;letter-spacing:0.2em;color:#6B5F50">PARA RELER</div>
+        <sc-for list="{{ wrongList }}" as="w" hint-placeholder-count="3">
+          <div style="display:grid;grid-template-columns:36px minmax(0,1fr);gap:8px"><span style="color:#7A2E26;font-weight:600">{{ w.n }}.</span><span>{{ w.q }}</span></div>
+        </sc-for>
+      </div>
+    </sc-if>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button onClick="{{ startNew }}" style="background:#2B241C;color:#F3EDE1;border:none;padding:14px 22px;cursor:pointer;font-family:Cinzel,serif;font-size:15px;letter-spacing:0.12em;min-height:48px" style-hover="background:#7A2E26">NOVA SABATINA</button>
+      <button onClick="{{ goStudy }}" style="background:transparent;border:1px solid #2B241C;padding:14px 22px;cursor:pointer;font-family:Cinzel,serif;font-size:15px;letter-spacing:0.12em;min-height:48px">MODO ESTUDO</button>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isStudy }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <h1 style="margin:0;font-family:Cinzel,serif;font-weight:600;font-size:28px">Modo estudo</h1>
+      <div style="color:#4A3F33">Toque numa pergunta para ver ou esconder a resposta.</div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button onClick="{{ toggleHide }}" style="background:transparent;border:1px solid #2B241C;padding:8px 14px;cursor:pointer;font-size:16px;min-height:44px">{{ hideLabel }}</button>
+      <sc-if value="{{ canFilterWrong }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleOnlyWrong }}" style="background:{{ onlyWrongBg }};color:{{ onlyWrongFg }};border:1px solid #7A2E26;padding:8px 14px;cursor:pointer;font-size:16px;min-height:44px">Só as que errei ({{ wrongCount }})</button>
+      </sc-if>
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <sc-for list="{{ studyList }}" as="s" hint-placeholder-count="6">
+        <div onClick="{{ s.toggle }}" style="display:grid;grid-template-columns:36px minmax(0,1fr);gap:8px;padding:16px 0;border-bottom:1px solid #D5C8B0;cursor:pointer">
+          <span style="font-family:Cinzel,serif;font-weight:600;color:#6B5F50;font-size:16px;padding-top:2px">{{ s.n }}</span>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="font-style:italic;font-size:20px;text-wrap:pretty">{{ s.q }}</div>
+            <sc-if value="{{ s.show }}" hint-placeholder-val="{{ true }}">
+              <div style="white-space:pre-line;color:#3A3027;text-wrap:pretty">{{ s.full }}</div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;repetirApos&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:5,&quot;min&quot;:1,&quot;max&quot;:15,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Sabatina&quot;},&quot;acertosParaMacificar&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:2,&quot;min&quot;:1,&quot;max&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Sabatina&quot;},&quot;pularTelhamento&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Teste&quot;}}">
+class Component extends DCLogic {
+  state = { ready: false, screen: 'tel', telI: 0, telPicks: [], telOpts: null, sess: null, hide: false, open: {}, onlyWrong: false };
+  KEY = 'sabatina.reaa.aprendiz.v1';
+
+  componentDidMount() {
+    const go = () => { if (!window.SAB_ENC) { this.t = setTimeout(go, 50); return; } this.init(); };
+    go();
+  }
+  componentWillUnmount() { clearTimeout(this.t); clearTimeout(this.ct); clearTimeout(this.ct1); clearTimeout(this.ct2); }
+  componentDidUpdate(pp) {
+    if (pp.pularTelhamento !== this.props.pularTelhamento && this.props.pularTelhamento && window.SAB && (this.state.screen === 'tel' || this.state.screen === 'profano')) this.setState({ screen: 'setup' });
+  }
+  shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+  gap() { return Math.max(1, this.props.repetirApos ?? 5); }
+  need() { return Math.max(1, this.props.acertosParaMacificar ?? 2); }
+
+  async init() {
+    let sess = null;
+    try { sess = JSON.parse(localStorage.getItem(this.KEY)); } catch (e) {}
+    let saved = null;
+    try { saved = sessionStorage.getItem('sabatina.tel'); } catch (e) {}
+    const passed = saved && await this.unlock(this.unb64(saved)).catch(() => false);
+    this.setState({ ready: true, sess, screen: passed ? 'setup' : 'tel', telOpts: this.buildTel(), telI: 0, telPicks: [] });
+  }
+  buildTel() { return window.SAB_ENC.telhamento.map(t => t.opts.map(o => ({ t: o }))); }
+  unb64(s) { return Uint8Array.from(atob(s), c => c.charCodeAt(0)); }
+  // Chave mestra = PBKDF2 das 6 cifras escolhidas; só as corretas decifram os dados (ver cifrar.ps1).
+  async deriveMaster(picks) {
+    const E = window.SAB_ENC;
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(picks.map(p => p.normalize('NFC')).join('\n')), 'PBKDF2', false, ['deriveBits']);
+    return new Uint8Array(await crypto.subtle.deriveBits({ name: 'PBKDF2', hash: E.kdf.hash, salt: this.unb64(E.kdf.salt), iterations: E.kdf.iterations }, base, 256));
+  }
+  async unlock(master) {
+    const E = window.SAB_ENC, enc = new TextEncoder(), iv = this.unb64(E.iv), ct = this.unb64(E.ct);
+    const hm = await crypto.subtle.importKey('raw', master, { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+    const sub = async label => new Uint8Array(await crypto.subtle.sign('HMAC', hm, enc.encode(label)));
+    const macKey = await crypto.subtle.importKey('raw', await sub('mac'), { name: 'HMAC', hash: 'SHA-256' }, false, ['verify']);
+    const signed = new Uint8Array(iv.length + ct.length); signed.set(iv); signed.set(ct, iv.length);
+    if (!await crypto.subtle.verify('HMAC', macKey, this.unb64(E.mac), signed)) throw new Error('telhamento incorreto');
+    const aesKey = await crypto.subtle.importKey('raw', await sub('enc'), 'AES-CBC', false, ['decrypt']);
+    const plain = await crypto.subtle.decrypt({ name: 'AES-CBC', iv }, aesKey, ct);
+    const q = JSON.parse(new TextDecoder().decode(plain));
+    q.forEach(x => { if (!x.full) x.full = x.a; });
+    window.SAB = { q, telhamento: q.filter(x => x.tel) };
+    this.byN = {}; q.forEach(x => this.byN[x.n] = x);
+    return true;
+  }
+  lock() {
+    try { sessionStorage.removeItem('sabatina.tel'); } catch (e) {}
+    window.SAB = null; this.byN = null;
+  }
+  save(sess) { try { localStorage.setItem(this.KEY, JSON.stringify(sess)); } catch (e) {} }
+
+  async telPick(i) {
+    const picks = this.state.telPicks.slice(0, this.state.telI); picks.push(this.state.telOpts[this.state.telI][i].t);
+    if (picks.length < this.state.telOpts.length) return this.setState({ telPicks: picks, telI: this.state.telI + 1 });
+    this.setState({ screen: 'verificando', telPicks: [] });
+    let ok = false;
+    try {
+      const master = await this.deriveMaster(picks);
+      ok = await this.unlock(master);
+      try { sessionStorage.setItem('sabatina.tel', btoa(String.fromCharCode(...master))); } catch (e) {}
+    } catch (e) {}
+    if (ok) { this.setState({ screen: 'concedido', cFade: 0 }); clearTimeout(this.ct); clearTimeout(this.ct1); clearTimeout(this.ct2);
+      this.ct1 = setTimeout(() => this.setState({ cFade: 1 }), 60);
+      this.ct2 = setTimeout(() => this.setState({ cFade: 0 }), 3000);
+      this.ct = setTimeout(() => this.setState({ screen: 'setup' }), 3950); }
+    else this.setState({ screen: 'profano' });
+  }
+
+  draw(s) {
+    let idx = s.reviews.findIndex(r => r.due <= s.count), id, rev = false;
+    if (idx >= 0) { id = s.reviews[idx].id; rev = true; }
+    else if (s.deck.length) id = s.deck.shift();
+    else if (s.reviews.length) { s.reviews.sort((a, b) => a.due - b.due); id = s.reviews[0].id; rev = true; }
+    else { s.cur = null; s.done = true; return s; }
+    const q = this.byN[id];
+    s.cur = { id, rev, opts: this.shuffle([{ t: q.a, ok: true }, ...q.w.map(t => ({ t, ok: false }))]), picked: null };
+    return s;
+  }
+  startNew() {
+    const s = this.draw({ deck: this.shuffle(window.SAB.q.map(q => q.n)), reviews: [], count: 0, first: 0, mastered: [], everWrong: [], done: false, cur: null });
+    this.save(s); this.setState({ sess: s, screen: 'quiz' });
+  }
+  pick(i) {
+    const s = JSON.parse(JSON.stringify(this.state.sess)), c = s.cur;
+    if (c.picked != null) return;
+    c.picked = i; s.count++;
+    const ok = c.opts[i].ok, gap = this.gap();
+    if (c.rev) {
+      const r = s.reviews.find(r => r.id === c.id);
+      if (ok) { r.streak++; if (r.streak >= this.need()) { s.reviews = s.reviews.filter(x => x !== r); s.mastered.push(c.id); c.mastered = true; } else r.due = s.count + gap; }
+      else { r.streak = 0; r.due = s.count + gap; }
+    } else if (ok) s.first++;
+    else { s.everWrong.push(c.id); s.reviews.push({ id: c.id, due: s.count + gap, streak: 0 }); }
+    this.save(s); this.setState({ sess: s });
+  }
+  next() {
+    const s = this.draw(JSON.parse(JSON.stringify(this.state.sess)));
+    this.save(s); this.setState({ sess: s, screen: s.done ? 'fim' : 'quiz' });
+    window.scrollTo(0, 0);
+  }
+
+  renderVals() {
+    const st = this.state, S = window.SAB, sess = st.sess, total = S ? S.q.length : 60, need = this.need(), gap = this.gap();
+    const scr = st.ready ? st.screen : null;
+    const v = {
+      showLoading: !st.ready || scr === 'verificando', loadingText: scr === 'verificando' ? 'Verificando…' : 'Preparando…', isTel: scr === 'tel', isConcedido: scr === 'concedido', cOpacity: st.cFade ? 1 : 0, isProfano: scr === 'profano',
+      isApp: ['setup', 'quiz', 'fim', 'estudo'].includes(scr), isSetup: scr === 'setup', isQuiz: scr === 'quiz' && sess && sess.cur, isEnd: scr === 'fim', isStudy: scr === 'estudo',
+      gap, need, total,
+      restartTel: () => this.setState({ screen: 'tel', telI: 0, telPicks: [], telOpts: this.buildTel() }),
+      goSetup: () => this.setState({ screen: 'setup' }),
+      encerrar: () => { this.lock(); clearTimeout(this.ct); this.setState({ screen: 'tel', telI: 0, telPicks: [], telOpts: this.buildTel() }); window.scrollTo(0, 0); },
+      goStudy: () => { this.setState({ screen: 'estudo' }); window.scrollTo(0, 0); },
+      startNew: () => this.startNew(),
+      resume: () => this.setState({ screen: 'quiz' }),
+    };
+    if (st.ready && st.telOpts && scr === 'tel') {
+      const T = window.SAB_ENC.telhamento, t = T[st.telI];
+      Object.assign(v, {
+        telNum: st.telI + 1, telQ: t.q, telCanBack: st.telI > 0,
+        telBack: () => this.setState({ telI: st.telI - 1 }),
+        telDots: T.map((_, i) => ({ bg: i < st.telI ? '#2B241C' : i === st.telI ? '#B8A88C' : 'transparent' })),
+        telOptions: st.telOpts[st.telI].map((o, i) => ({ text: o.t, pick: () => this.telPick(i) })),
+      });
+    }
+    const resolved = sess ? sess.first + sess.mastered.length : 0;
+    const hasSaved = !!(sess && !sess.done && sess.cur);
+    Object.assign(v, {
+      hasSaved, savedLabel: hasSaved ? `${resolved} de ${total}` : '',
+      newLabel: hasSaved ? 'RECOMEÇAR DO ZERO' : 'INICIAR SABATINA',
+      newBg: hasSaved ? 'transparent' : '#2B241C', newFg: hasSaved ? '#2B241C' : '#F3EDE1',
+    });
+    if (sess && sess.cur && this.byN) {
+      const c = sess.cur, q = this.byN[c.id], answered = c.picked != null, okPicked = answered && c.opts[c.picked].ok;
+      const r = c.rev ? sess.reviews.find(x => x.id === c.id) : null;
+      const streakNow = c.rev ? (c.mastered ? need : (r ? r.streak : 0)) : 0;
+      const answeredFirst = sess.count - sess.reviews.length;
+      let note = '';
+      if (answered) {
+        if (!okPicked) note = `Esta pergunta voltará em ${gap} perguntas.`;
+        else if (c.rev && c.mastered) note = 'Pergunta maçificada.';
+        else if (c.rev) note = `Mais ${need - streakNow} acerto${need - streakNow > 1 ? 's' : ''} seguido${need - streakNow > 1 ? 's' : ''} para maçificar.`;
+        else note = '';
+      }
+      Object.assign(v, {
+        resolved, progressPct: (resolved / total * 100) + '%', pendingCount: sess.reviews.length,
+        firstPct: sess.count ? Math.round(sess.first / Math.max(1, sess.first + sess.everWrong.length) * 100) + '%' : '—',
+        qNum: q.n, qTelTag: q.tel ? ' · TELHAMENTO' : '', qText: q.sq || q.q, isReview: c.rev,
+        streakLabel: `${streakNow} de ${need} acertos`,
+        answered, verdict: okPicked ? 'Correto' : 'Incorreto', verdictColor: okPicked ? '#3F5E3A' : '#7A2E26', verdictNote: note,
+        fullAnswer: q.full, next: () => this.next(),
+        options: c.opts.map((o, i) => {
+          const isOk = answered && o.ok, isBad = answered && i === c.picked && !o.ok;
+          return {
+            letter: 'ABCDE'[i], text: o.t, disabled: answered, cursor: answered ? 'default' : 'pointer',
+            bg: isOk ? '#E4EADB' : isBad ? '#F2DFDA' : 'transparent',
+            border: isOk ? '#3F5E3A' : isBad ? '#7A2E26' : '#C9BBA0',
+            letterColor: isOk ? '#3F5E3A' : isBad ? '#7A2E26' : '#6B5F50',
+            opacity: answered && !isOk && !isBad ? 0.55 : 1,
+            pick: () => this.pick(i),
+          };
+        }),
+      });
+    }
+    const wrongIds = sess ? sess.everWrong : [];
+    Object.assign(v, {
+      firstRight: sess ? sess.first : 0, wrongCount: wrongIds.length, answeredTotal: sess ? sess.count : 0,
+      hasWrongList: wrongIds.length > 0,
+      wrongList: S && this.byN ? wrongIds.slice().sort((a, b) => a - b).map(n => ({ n, q: this.byN[n].sq || this.byN[n].q })) : [],
+    });
+    if (scr === 'estudo') {
+      const only = st.onlyWrong && wrongIds.length;
+      const list = S.q.filter(q => !only || wrongIds.includes(q.n));
+      Object.assign(v, {
+        hideLabel: st.hide ? 'Mostrar respostas' : 'Esconder respostas',
+        toggleHide: () => this.setState({ hide: !st.hide, open: {} }),
+        canFilterWrong: wrongIds.length > 0,
+        toggleOnlyWrong: () => this.setState({ onlyWrong: !st.onlyWrong }),
+        onlyWrongBg: st.onlyWrong ? '#7A2E26' : 'transparent', onlyWrongFg: st.onlyWrong ? '#F3EDE1' : '#7A2E26',
+        studyList: list.map(q => ({
+          n: q.n, q: q.sq || q.q, full: q.full,
+          show: st.open[q.n] ? st.hide : !st.hide,
+          toggle: () => this.setState(s => ({ open: { ...s.open, [q.n]: !s.open[q.n] } })),
+        })),
+      });
+    }
+    return v;
+  }
+}
+</script>
+</body>
+</html>
